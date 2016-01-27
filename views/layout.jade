@@ -1,0 +1,58 @@
+doctype html
+html
+	head
+		title= title
+		meta(charset="utf-8")
+		meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
+		link(rel='stylesheet', href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.css")
+		link(rel='stylesheet', href="/stylesheets/style.css")
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.js")
+	body
+		div(class="ui inverted menu")
+			div(class="ui container")
+				div(class="item")
+					img(src="/images/logo.png")
+				a(class="item") Home
+				a(class="item") About
+				a(class="item") Teams
+				a(class="right item") Contact
+
+		block content
+
+		div(class="ui inverted vertical footer segment")
+			div(class="ui center aligned container")
+				div(class="ui stackable inverted divided grid")
+					div(class="three wide column")
+						h4(class="ui inverted header") Group 1
+						div(class="ui inverted link list")
+							a(class="item" href='#') Link One
+							a(class="item" href='#') Link Two
+							a(class="item" href='#') Link Three
+							a(class="item" href='#') Link Four
+					div(class="three wide column")
+						h4(class="ui inverted header") Group 2
+						div(class="ui inverted link list")
+							a(class="item" href='#') Link One
+							a(class="item" href='#') Link Two
+							a(class="item" href='#') Link Three
+							a(class="item" href='#') Link Four
+					div(class="three wide column")
+						h4(class="ui inverted header") Group 3
+						div(class="ui inverted link list")
+							a(class="item" href='#') Link One
+							a(class="item" href='#') Link Two
+							a(class="item" href='#') Link Three
+							a(class="item" href='#') Link Four
+					div(class="seven wide column")
+						h4(class="ui inverted header") Footer Header
+						p Extra space for a call to action inside the footer that could help re-engage users 
+				div(class="ui inverted section divider")
+				img(class="ui centered mini image" src='/images/logo.png')
+				div(class="ui horizontal inverted small divided link list")
+					a(class="item" href='#') Site Map
+					a(class="item" href='#') Contact Us
+					a(class="item" href='#') Terms and Conditions
+					a(class="item" href='#') Privacy Policy
+
