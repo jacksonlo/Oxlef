@@ -5,20 +5,21 @@ block content
 		div(class="ui grid")
 			div(class="row")
 				div(class="four wide column")
-					div(class="ui large vertical menu")
+					div(id="menu" class="ui large vertical menu")
 						div(class="item")
 							div(class="ui icon input")
 								input(type="text" placeholder="Search teams...")
 								i(class="search icon")
-						a(class="item")
-							div(class="ui green label") +20%
-							| Cloud 9
-						a(class="item")
-							div(class="ui label") +1%
-							| Fnatic
-						a(class="item")
-							div(class="ui red label") -12%
-							| NiP
+						each team in team_data
+							a(class="item")
+								div(class="ui green label") 20%
+								| #{team.name}
+						//- a(class="item")
+						//- 	div(class="ui label") +1%
+						//- 	| Fnatic
+						//- a(class="item")
+						//- 	div(class="ui red label") -12%
+						//- 	| NiP
 				div(id="contentContainer" class="twelve wide column")
 					img(id="teamLogo" src="/images/teams/c9logo.png")
 					h1(id="contentTitle") Team Name

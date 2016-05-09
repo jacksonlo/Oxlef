@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+var db = require('./db');
+
 var app = express();
 
 // view engine setup
@@ -21,6 +23,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+db.connect('mongodb://localhost:27017/oxlefdb', function(err) {
+  if (err) {
+    console.log('Unable to connect to Mongo.');
+    process.exit(1);
+  } else {
+    console.log('Connected to Mongo');
+  }
+});
 
 app.use('/', routes);
 app.use('/users', users);
