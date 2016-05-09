@@ -11,7 +11,7 @@ block content
 								input(type="text" placeholder="Search teams...")
 								i(class="search icon")
 						each team in team_data
-							a(class="item")
+							a(class="item" data-value="#{team.name}")
 								div(class="ui green label") 20%
 								| #{team.name}
 						//- a(class="item")
@@ -24,6 +24,7 @@ block content
 					img(id="teamLogo" src="/images/teams/c9logo.png")
 					h1(id="contentTitle") Team Name
 						small  Region
+					div(id="chart")
 
 
 
