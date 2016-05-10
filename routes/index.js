@@ -21,7 +21,21 @@ router.get('/get_team_stats', function(req, res, next) {
 
 router.get('/get_team_data', function(req, res, next) {
 	var team = req.query.team;
-	var results = db.get().collection(collection_name).find({"team": team}).toArray(function(err, docs) {
+	// var results = db.get().collection(collection_name).find({"team": team}).toArray(function(err, docs) {
+	// 	res.send(docs);
+	// });
+	db.get().collection(collection_name).aggregate([
+		{ $group: {	_id: "$team", 
+				volume: { $sum: "$quantity" },
+				market_cap: { $multiply: ["$price", "$quantity"] },
+				min: { $min: "$price" },
+				max: { $max: "$price" }
+			  } 
+		},
+		{ $match: {	team: team } },
+		{ $out: "oxlefstats" }
+	]);
+	db.get().collection("oxlefstats").find().toArray(function(err, docs) {
 		res.send(docs);
 	});
 });
