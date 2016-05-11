@@ -14,17 +14,20 @@ $(document).ready(function() {
 				zoomType: 'x'
 			},
 			title: {
-				text: initial_team + "'s Market Capitalization"
+				text: initial_team + "'s Volumes in Sales"
 			},
 			subtitle: {
-				text: 'Overall Market Sticker Value Over Time'
+				text: 'Overall Market Sticker Sales Overtime'
 			},
 			xAxis: {
-				type: 'datetime'
+				type: 'datetime',
+				labels: {
+	                rotation: -45
+	            }
 			},
 			yAxis: {
 				title: {
-					text: 'Market Capitalization'
+					text: 'US Dollars'
 				}
 			},
 			legend: {
@@ -59,7 +62,7 @@ $(document).ready(function() {
 
 			series: [{
 				type: 'area',
-				name: 'Market Capitalization',
+				name: 'Volume',
 				data: data
 			}]
 		});
@@ -86,7 +89,7 @@ $(document).ready(function() {
 			$("#teamLogo").attr("src", "/images/teams/" + team.replace(/ /g, "_") + "_banner.png")
 			var chart = $("#chart").highcharts();
 			chart.setTitle({
-				text: team + "'s Market Capitalization"
+				text: team + "'s Volumes in Sales"
 			});
 			chart.series[0].setData(data);
 		});

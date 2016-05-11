@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var _ = require('csgo-api-migrations/node_modules/underscore');
 
 var db = require('../db');
 
@@ -21,22 +22,13 @@ router.get('/get_team_stats', function(req, res, next) {
 
 router.get('/get_team_data', function(req, res, next) {
 	var team = req.query.team;
-	// var results = db.get().collection(collection_name).find({"team": team}).toArray(function(err, docs) {
-	// 	res.send(docs);
-	// });
-	db.get().collection(collection_name).aggregate([
-		{ $group: {	_id: "$team", 
-				volume: { $sum: "$quantity" },
-				market_cap: { $multiply: ["$price", "$quantity"] },
-				min: { $min: "$price" },
-				max: { $max: "$price" }
-			  } 
-		},
-		{ $match: {	team: team } },
-		{ $out: "oxlefstats" }
-	]);
-	db.get().collection("oxlefstats").find().toArray(function(err, docs) {
-		res.send(docs);
+	db.get().collection("oxlef_" + team).find({}, {_id: 1, market_cap: 1}).sort({ _id: 1 }).toArray(function(err, docs) {
+		var result = [];
+		_.each(docs, function(doc) {
+			var date = Date.UTC(doc._id.year, doc._id.month, doc._id.day);
+			result.push([date, parseFloat(doc.market_cap.toFixed(2))]);
+		});
+		res.send(result);
 	});
 });
 
