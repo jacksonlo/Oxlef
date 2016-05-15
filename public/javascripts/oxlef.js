@@ -1,9 +1,22 @@
 //
 $(document).ready(function() {
-	//Initialize Chart
+	//Initialize Chart and stats
 	var initial_team = "Astralis";
 	$("#contentTitle").html(initial_team);
-	$("#teamLogo").attr("src", "/images/teams/" + initial_team.replace(/ /g, "_") + "_banner.png")
+	$("#teamLogo").attr("src", "/images/teams/" + initial_team.replace(/ /g, "_") + "_banner.png");
+
+	$.get("/get_team_stats",
+	{
+		team: initial_team.replace(/ /g, "_"),
+	},
+	function(data, status){
+		//console.log(data);
+		$("#lowest").find("small").text(formatValue(data.lowest.market_cap));
+		$("#highest").find("small").text(formatValue(data.highest.market_cap));
+		$("#average").find("small").text(formatValue(data.average.average));
+		$("#marketCap").find("small").text(formatValue(data.market_cap.market_cap));
+	});
+
 	$.get("/get_team_data",
 	{
 		team: initial_team,
@@ -73,15 +86,19 @@ $(document).ready(function() {
 		var team = $(this).attr("data-value");
 		$.get("/get_team_stats",
 		{
-			team: team,
+			team: team.replace(/ /g, "_"),
 		},
 		function(data, status){
-			console.log(data);
+			//console.log(data);
+			$("#lowest").find("small").text(formatValue(data.lowest.market_cap));
+			$("#highest").find("small").text(formatValue(data.highest.market_cap));
+			$("#average").find("small").text(formatValue(data.average.average));
+			$("#marketCap").find("small").text(formatValue(data.market_cap.market_cap));
 		});
 
 		$.get("/get_team_data",
 		{
-			team: team,
+			team: team.replace(/ /g, "_"),
 		},
 		function(data, status){
 			//console.log(data);
@@ -94,4 +111,14 @@ $(document).ready(function() {
 			chart.series[0].setData(data);
 		});
 	});
+
+
+	//Format big numbers by space separating and rounding to 2 dec
+	function formatValue(val){
+		val = val.toFixed(2);
+    	while (/(\d+)(\d{3})/.test(val.toString())){
+      		val = val.toString().replace(/(\d+)(\d{3})/, '$1'+' '+'$2');
+    	}
+    	return val;
+  	}
 });

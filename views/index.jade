@@ -12,7 +12,7 @@ block content
 								i(class="search icon")
 						each team in team_data
 							a(class="item" data-value="#{team.name}")
-								div(class="ui green label") 20%
+								//- div(class="ui label") #{team.stats.change}%
 								| #{team.name}
 						//- a(class="item")
 						//- 	div(class="ui label") +1%
@@ -21,9 +21,23 @@ block content
 						//- 	div(class="ui red label") -12%
 						//- 	| NiP
 				div(id="contentContainer" class="twelve wide column")
-					img(id="teamLogo" src="/images/teams/Cloud9_banner.png")
-					h1(id="contentTitle") Cloud9
+					img(id="teamLogo" src="/images/teams/Astralis_banner.png")
+					h1(id="contentTitle") Astralis
 						small  North America
+					div(id="statContainer" class="twelve wide column")
+						div(class="ui horizontal segments") 
+							div(class="ui segment") 
+								p(id="marketCap") Market Cap: 
+									small 100,000
+							div(class="ui segment") 
+								p(id="average") Average: 
+									small 32,000
+							div(class="ui segment") 
+								p(id="highest") Highest: 
+									small 50,000
+							div(class="ui segment") 
+								p(id="lowest") Lowest: 
+									small 2,000
 					div(id="chart")
 
 

@@ -15,9 +15,26 @@ router.get('/', function(req, res, next) {
 
 router.get('/get_team_stats', function(req, res, next) {
 	var team = req.query.team;
-	var results = db.get().collection(collection_name).find({"name": team}).toArray(function(err, docs) {
-		res.send(docs);
+	db.get().collection("oxlef_" + team).find().sort({market_cap: -1}).limit(1).toArray(function(err, highest) {
+		db.get().collection("oxlef_" + team).find().sort({market_cap: 1}).limit(1).toArray(function(err, lowest) {
+			db.get().collection("oxlef_" + team).aggregate({ 
+				"$group": {
+					"_id": null, 
+					"average": { "$avg": "$market_cap" } 
+				} 
+			}, function(err, average) {
+				db.get().collection("oxlef_" + team).aggregate({
+					"$group": {
+						"_id": null,
+						"market_cap": { "$sum": "$market_cap" }
+					}
+				}, function(err, market_cap) {
+					res.send({highest: highest[0], lowest: lowest[0], average: average[0], market_cap: market_cap[0]});
+				});
+			});
+		});
 	});
+	
 });
 
 router.get('/get_team_data', function(req, res, next) {
