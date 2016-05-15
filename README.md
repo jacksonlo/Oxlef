@@ -1,7 +1,7 @@
 # Oxlef
 Analyzing the CS:GO steam market sticker economy for various eSport teams.
 
-![Sample Image 1](sample1.png?raw=true "Sample Image 1")
+![Sample Image 1](sample1.jpg?raw=true "Sample Image 1")
 
 For each eSport team, statistics on the stickers sold over time in the Steam market is visualized with the summary stats and graph.
 
